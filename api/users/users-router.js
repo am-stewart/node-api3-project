@@ -1,11 +1,10 @@
 const express = require('express');
 
-// const {
-//   logger,
-//   validateUserId,
-//   validateUser,
-//   validatePost
-// } = require('./../middleware/middleware');
+const {
+  validateUserId,
+  validateUser,
+  validatePost
+} = require('./../middleware/middleware');
 
 const Users = require('./users-model');
 // const Posts = require('./../posts/posts-model');
@@ -21,9 +20,8 @@ router.get('/', (req, res, next) => {
     .catch(next)
 });
 
-router.get('/:id', (req, res) => {
-  // RETURN THE USER OBJECT
-  // this needs a middleware to verify user id
+router.get('/:id', validateUserId, (req, res) => {
+  res.json(req.user);
 });
 
 router.post('/', (req, res) => {
