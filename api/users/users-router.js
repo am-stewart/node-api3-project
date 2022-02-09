@@ -7,7 +7,7 @@ const {
 } = require('./../middleware/middleware');
 
 const Users = require('./users-model');
-// const Posts = require('./../posts/posts-model');
+const Posts = require('./../posts/posts-model');
 
 
 const router = express.Router();
@@ -51,9 +51,13 @@ router.delete('/:id', validateUserId, async (req, res, next) => {
   }
 });
 
-router.get('/:id/posts', (req, res) => {
+router.get('/:id/posts', validateUserId, (req, res, next) => {
   // RETURN THE ARRAY OF USER POSTS
-  // this needs a middleware to verify user id
+  Users.getUserPosts(req.params.id)
+    .then(posts => {
+      res.status(200).json(posts);
+    })
+    .catch(next);
 });
 
 router.post('/:id/posts', (req, res) => {
