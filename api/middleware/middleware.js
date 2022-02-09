@@ -1,5 +1,4 @@
 const { getById } = require('./../users/users-model');
-// const yup = require('yup');
 
 function logger(req, res, next) {
   console.log(`${req.method} ${req.url} [${new Date().toISOString()}]`);
@@ -46,7 +45,6 @@ function validatePost(req, res, next) {
   }
 }
 
-// do not forget to expose these functions to other modules
 module.exports = {
   logger,
   validateUserId,
