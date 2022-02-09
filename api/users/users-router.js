@@ -41,9 +41,14 @@ router.put('/:id', validateUserId, validateUser, (req, res, next) => {
     .catch(next);
 });
 
-router.delete('/:id', (req, res) => {
-  // RETURN THE FRESHLY DELETED USER OBJECT
-  // this needs a middleware to verify user id
+router.delete('/:id', validateUserId, async (req, res, next) => {
+  try {
+    const user = await Users.getById(req.params.id)
+    await Users.remove(req.params.id)
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
 });
 
 router.get('/:id/posts', (req, res) => {
@@ -65,5 +70,4 @@ router.use((err, req, res, next) => {
   });
 });
 
-// do not forget to export the router
 module.exports = router;
