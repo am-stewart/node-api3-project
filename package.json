@@ -16,7 +16,8 @@
         "express": "^4.17.2",
         "knex": "^0.95.14",
         "nanoid": "^3.2.0",
-        "sqlite3": "^5.0.2"
+        "sqlite3": "^5.0.2",
+        "yup": "^0.32.11"
     },
     "devDependencies": {
         "@types/jest": "^27.0.3",
